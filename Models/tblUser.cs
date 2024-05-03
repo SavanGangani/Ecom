@@ -13,8 +13,11 @@ namespace Ecom.Models
         public string c_email{ get; set; }
         public string c_name{ get; set; }
         public string c_gender{ get; set; }
+        public int c_countryid{get; set; }
         public string c_countryname{ get; set; }
+        public int c_stateid{get; set; }
         public string c_statename{ get; set; }
+        public int c_cityid{get;set;}
         public string c_cityname{ get; set; }
         public string c_role{ get; set; }
     }

@@ -91,7 +91,115 @@ namespace Ecom.repository
             return result;
         }
 
+        public List<tblUser> GetAllCountry()
+        {
+            List<tblUser> countryList = new List<tblUser>();
 
+            try
+            {
+                conn.Open();
+                string query = "SELECT c_countryid,c_countryname FROM t_country";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var country = new tblUser
+                        {
+                            c_countryid = reader.GetInt32(0),
+                            c_countryname = reader.GetString(1)
+                        };
+                        countryList.Add(country);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return countryList;
+        }
+
+
+        public List<tblUser> GetState(int countryid)
+        {
+            List<tblUser> stateList = new List<tblUser>();
+
+            try
+            {
+                conn.Open();
+                string query = "SELECT c_stateid,c_statename,c_countryid FROM t_state WHERE c_countryid=@c_countryid";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@c_countryid", countryid);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var state = new tblUser
+                        {
+                            c_stateid = reader.GetInt32(0),
+                            c_statename = reader.GetString(1),
+                            c_countryid = reader.GetInt32(2)
+                        };
+                        stateList.Add(state);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return stateList;
+        }
+
+        public List<tblUser> GetCity(int stateid)
+        {
+            List<tblUser> cityList = new List<tblUser>();
+
+            try
+            {
+                conn.Open();
+                string query = "SELECT c_cityid,c_cityname,c_stateid FROM t_state WHERE c_stateid=@c_stateid";
+                NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@c_stateid", stateid);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var city = new tblUser
+                        {
+                            c_cityid = reader.GetInt32(0),
+                            c_cityname = reader.GetString(1),
+                            c_stateid = reader.GetInt32(2)
+                        };
+                        cityList.Add(city);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return cityList;
+        }
 
     }
 }
