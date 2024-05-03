@@ -67,6 +67,27 @@ namespace Ecom.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult GetAllCountries()
+        {
+            var countries = _userRepository.GetAllCountry();
+            return Json(countries);
+        }
+
+        [HttpGet]
+        public IActionResult GetStates(int countryId)
+        {
+            var states = _userRepository.GetState(countryId);
+            return Json(states);
+        }
+
+        [HttpGet]
+        public IActionResult GetCities(int stateId)
+        {
+            var cities = _userRepository.GetCity(stateId);
+            return Json(cities);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
