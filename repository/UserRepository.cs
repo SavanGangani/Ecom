@@ -127,16 +127,16 @@ namespace Ecom.repository
 
 
 
-        public List<tblState> GetState(int countryid)
+        public List<tblState> GetState(string countryName)
         {
             List<tblState> stateList = new List<tblState>();
 
             try
             {
                 conn.Open();
-                string query = "SELECT c_stateid,c_statename,c_countryid FROM t_state WHERE c_countryid=@c_countryid";
+                string query = "SELECT c_stateid,c_statename,c_countryname FROM t_state WHERE c_countryname=@c_countryname";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@c_countryid", countryid);
+                cmd.Parameters.AddWithValue("@c_countryname", countryName);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -145,7 +145,7 @@ namespace Ecom.repository
                         {
                             c_stateid = reader.GetInt32(0),
                             c_statename = reader.GetString(1),
-                            c_countryid = reader.GetInt32(2)
+                            c_countryname = reader.GetString(2)
                         };
                         stateList.Add(state);
                     }
@@ -164,16 +164,16 @@ namespace Ecom.repository
             return stateList;
         }
 
-        public List<tblCity> GetCity(int stateid)
+        public List<tblCity> GetCity(string stateName)
         {
             List<tblCity> cityList = new List<tblCity>();
 
             try
             {
                 conn.Open();
-                string query = "SELECT c_cityid,c_cityname,c_stateid FROM t_city WHERE c_stateid=@c_stateid";
+                string query = "SELECT c_cityid,c_cityname,c_statename FROM t_city WHERE c_statename=@c_statename";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@c_stateid", stateid);
+                cmd.Parameters.AddWithValue("@c_statename", stateName);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -182,7 +182,7 @@ namespace Ecom.repository
                         {
                             c_cityid = reader.GetInt32(0),
                             c_cityname = reader.GetString(1),
-                            c_stateid = reader.GetInt32(2)
+                            c_statename = reader.GetString(2)
                         };
                         cityList.Add(city);
                     }

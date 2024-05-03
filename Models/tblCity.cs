@@ -9,6 +9,6 @@ namespace Ecom.Models
     {
         public int c_cityid{get;set;}
         public string c_cityname{ get; set; }
-        public int c_stateid{get; set; }
+        public string c_statename{get; set; }
     }
 }

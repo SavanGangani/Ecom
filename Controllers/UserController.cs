@@ -75,16 +75,16 @@ namespace Ecom.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetStates(int countryId)
+        public IActionResult GetStates(string countryName)
         {
-            var states = _userRepository.GetState(countryId);
+            var states = _userRepository.GetState(countryName);
             return Json(states);
         }
 
         [HttpGet]
-        public IActionResult GetCities(int stateId)
+        public IActionResult GetCities(string stateName)
         {
-            var cities = _userRepository.GetCity(stateId);
+            var cities = _userRepository.GetCity(stateName);
             return Json(cities);
         }
 

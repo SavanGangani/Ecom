@@ -11,7 +11,7 @@ namespace Ecom.repository
         public void Register(tblUser user);
       List<tblUser> Login(tblUser user);
       List<tblCountry> GetAllCountry();
-      List<tblState> GetState(int countryid);
-      List<tblCity> GetCity(int stateid);
+      List<tblState> GetState(string countryName);
+      List<tblCity> GetCity(string stateName);
     }
 }

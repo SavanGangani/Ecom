@@ -9,7 +9,7 @@ namespace Ecom.Models
     {
         public int c_stateid{get; set; }
         public string c_statename{ get; set;}
-        public int c_countryid{get; set; }
+        public string c_countryname{get; set; }
 
     }
 }
