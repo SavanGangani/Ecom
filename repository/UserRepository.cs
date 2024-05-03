@@ -91,9 +91,9 @@ namespace Ecom.repository
             return result;
         }
 
-        public List<tblUser> GetAllCountry()
+        public List<tblCountry> GetAllCountry()
         {
-            List<tblUser> countryList = new List<tblUser>();
+            List<tblCountry> countryList = new List<tblCountry>();
 
             try
             {
@@ -104,14 +104,13 @@ namespace Ecom.repository
                 {
                     while (reader.Read())
                     {
-                        var country = new tblUser
+                        var country = new tblCountry
                         {
                             c_countryid = reader.GetInt32(0),
                             c_countryname = reader.GetString(1)
                         };
                         countryList.Add(country);
                     }
-
                 }
             }
             catch (Exception ex)
@@ -127,9 +126,10 @@ namespace Ecom.repository
         }
 
 
-        public List<tblUser> GetState(int countryid)
+
+        public List<tblState> GetState(int countryid)
         {
-            List<tblUser> stateList = new List<tblUser>();
+            List<tblState> stateList = new List<tblState>();
 
             try
             {
@@ -141,7 +141,7 @@ namespace Ecom.repository
                 {
                     while (reader.Read())
                     {
-                        var state = new tblUser
+                        var state = new tblState
                         {
                             c_stateid = reader.GetInt32(0),
                             c_statename = reader.GetString(1),
@@ -164,21 +164,21 @@ namespace Ecom.repository
             return stateList;
         }
 
-        public List<tblUser> GetCity(int stateid)
+        public List<tblCity> GetCity(int stateid)
         {
-            List<tblUser> cityList = new List<tblUser>();
+            List<tblCity> cityList = new List<tblCity>();
 
             try
             {
                 conn.Open();
-                string query = "SELECT c_cityid,c_cityname,c_stateid FROM t_state WHERE c_stateid=@c_stateid";
+                string query = "SELECT c_cityid,c_cityname,c_stateid FROM t_city WHERE c_stateid=@c_stateid";
                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@c_stateid", stateid);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var city = new tblUser
+                        var city = new tblCity
                         {
                             c_cityid = reader.GetInt32(0),
                             c_cityname = reader.GetString(1),

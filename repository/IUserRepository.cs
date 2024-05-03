@@ -10,8 +10,8 @@ namespace Ecom.repository
     {
         public void Register(tblUser user);
       List<tblUser> Login(tblUser user);
-      List<tblUser> GetAllCountry();
-      List<tblUser> GetState(int countryid);
-      List<tblUser> GetCity(int stateid);
+      List<tblCountry> GetAllCountry();
+      List<tblState> GetState(int countryid);
+      List<tblCity> GetCity(int stateid);
     }
 }
